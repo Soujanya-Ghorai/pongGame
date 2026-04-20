@@ -1,6 +1,6 @@
-const hitSound = new Audio('sounds/hit.mp3');
+const hitSound = new Audio('fahhhhh.mp3');
 const wallSound = new Audio('sounds/wall.mp3');
-const scoreSound = new Audio('sounds/userScore.mp3');
+const scoreSound = new Audio('tf_nemesis.mp3');
 const canvas = document.getElementById("pongCanvas");
 const ctx = canvas.getContext("2d");
 const startBtn = document.getElementById("startBtn");
@@ -115,6 +115,7 @@ function update() {
     // Wall Collision (Top/Bottom)
     if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
         ball.velocityY = -ball.velocityY;
+        wallSound.play();
     }
 
     // Check which paddle is being hit
@@ -130,6 +131,8 @@ function update() {
         
         ball.velocityX = direction * ball.speed * Math.cos(angleRad);
         ball.velocityY = ball.speed * Math.sin(angleRad);
+
+        hitSound.play();
         
         // Increase speed slightly
         ball.speed += 0.2;
@@ -140,6 +143,9 @@ function update() {
         pcScore++;
         pcScoreElement.innerText = pcScore < 10 ? "0" + pcScore : pcScore;
         resetBall();
+
+        scoreSound.play();
+
     } else if (ball.x + ball.radius > canvas.width) {
         playerScore++;
         playerScoreElement.innerText = playerScore < 10 ? "0" + playerScore : playerScore;
